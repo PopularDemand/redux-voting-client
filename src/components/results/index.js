@@ -1,11 +1,12 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { List, Map } from 'immutable';
 
 import Winner from '../winner';
 import Tally from './tally';
 
-export default class Results extends PureComponent {
+export class Results extends PureComponent {
   render() {
     return this.props.winner ?
       <Winner ref="winner" winner={this.props.winner} /> :
@@ -32,3 +33,13 @@ Results.propTypes = {
   next: PropTypes.func.isRequired,
   winner: PropTypes.string
 };
+
+function mapStatetoProps(state) {
+  return {
+    winner: state.get('winner'),
+    pair: state.getIn(['vote', 'pair']),
+    tally: state.getIn(['vote', 'tally'])
+  };
+}
+
+export const ConnectedResults = connect(mapStatetoProps)(Results);

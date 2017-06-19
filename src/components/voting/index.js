@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { List } from 'immutable';
 
@@ -6,7 +7,7 @@ import Vote from './vote'
 import VotePane from './votePane';
 import Winner from '../winner';
 
-export default class Voting extends PureComponent {
+export class Voting extends PureComponent {
   getPair() {
     return this.props.pair;
   }
@@ -31,3 +32,12 @@ Voting.propTypes = {
   hasVoted: PropTypes.string,
   winner: PropTypes.string
 };
+
+function mapStatetoProps(state) {
+  return {
+    pair: state.getIn(['vote', 'pair']),
+    winner: state.get('winner')
+  };
+}
+
+ export const ConnectedVoting = connect(mapStatetoProps)(Voting);

@@ -8,7 +8,7 @@ import {
 import { expect } from 'chai';
 import { List } from 'immutable';
 
-import Voting from '../../src/components/voting';
+import { Voting } from '../../src/components/voting';
 import Vote from '../../src/components/voting/vote';
 import VotePane from '../../src/components/voting/votePane';
 
