@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { List } from 'immutable';
 import PropTypes from 'prop-types';
 import VotePane from './votePane';
 
@@ -22,7 +23,7 @@ export default class Vote extends PureComponent {
 }
 
 Vote.propTypes = {
-  pair: PropTypes.array.isRequired,
+  pair: PropTypes.instanceOf(List).isRequired,
   voteCallback: PropTypes.func.isRequired,
   hasVoted: PropTypes.string
 };

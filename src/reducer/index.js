@@ -1,15 +1,16 @@
 import { Map, List } from 'immutable';
 import {
   setState,
-  vote
+  vote,
+  resetVote
 } from './core';
 
 export default function reducer(state = Map(), action) {
   switch (action.type) {
   case 'SET_STATE':
-    return setState(state, action.state);
+    return resetVote(setState(state, action.state));
   case 'VOTE':
-    return vote (state, action.entry);
+    return vote(state, action.entry);
   }
   return state;
 };
