@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { List, Map } from 'immutable';
 
+import * as actionCreators from '../../actionCreators';
+
 import Winner from '../winner';
 import Tally from './tally';
 
@@ -37,9 +39,12 @@ Results.propTypes = {
 function mapStatetoProps(state) {
   return {
     winner: state.get('winner'),
-    pair: state.getIn(['vote', 'pair']),
-    tally: state.getIn(['vote', 'tally'])
+    pair: state.getIn(['vote', 'pair'], List()),
+    tally: state.getIn(['vote', 'tally'], Map())
   };
 }
 
-export const ConnectedResults = connect(mapStatetoProps)(Results);
+export const ConnectedResults = connect(
+  mapStatetoProps,
+  actionCreators
+)(Results);

@@ -77,7 +77,7 @@ describe('reducer', () => {
       }
     });
     const action = {type: 'VOTE', entry: 'Train'};
-    const nextState = reducer(action);
+    const nextState = reducer(state, action);
 
     expect(nextState).to.equal(fromJS({
       vote: {
@@ -96,7 +96,7 @@ describe('reducer', () => {
       }
     });
     const action = {type: 'VOTE', entry: 'Sunshine'};
-    const nextState = reducer(action);
+    const nextState = reducer(state, action);
 
     expect(nextState).to.equal(fromJS({
       vote: {

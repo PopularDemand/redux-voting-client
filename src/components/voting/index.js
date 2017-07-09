@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { List } from 'immutable';
+import { List, Map } from 'immutable';
 
-import * as actionCreators from '../../action-creators';
+import * as actionCreators from '../../actionCreators';
 
 import Vote from './vote'
 import VotePane from './votePane';
@@ -22,7 +22,8 @@ export class Voting extends PureComponent {
                   ref="winner" /> :
           <Vote pair={this.props.pair}
                 voteCallback={this.props.voteCallback}
-                hasVoted={this.props.hasVoted} />}
+                hasVoted={this.props.hasVoted}
+                tally={this.props.tally} />}
       </div>
     );
   }
@@ -30,16 +31,17 @@ export class Voting extends PureComponent {
 
 Voting.propTypes = {
   pair: PropTypes.instanceOf(List).isRequired,
-  // voteCallback: PropTypes.func.isRequired,
   hasVoted: PropTypes.string,
-  winner: PropTypes.string
+  winner: PropTypes.string,
+  tally: PropTypes.instanceOf(Map)
 };
 
 function mapStateToProps(state) {
   return {
     pair: state.getIn(['vote', 'pair'], List()),
     winner: state.get('winner'),
-    hasVoted: state.get('hasVoted')
+    hasVoted: state.get('hasVoted'),
+    tally: state.getIn(['vote', 'tally'], Map())
   };
 }
 

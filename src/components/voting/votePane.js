@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { Map } from 'immutable';
 
 export default class VotePane extends PureComponent {
 
@@ -21,11 +22,13 @@ export default class VotePane extends PureComponent {
 
   render() {
     const entry = this.props.entry;
+    const tally = this.props.tally;
     return (
       <button key={entry}
               onClick={(evt) => this._handleClick(evt)}
               disabled={this._isDisabled()}>
         <h1>{entry}</h1>
+        <p>{tally.get(entry)}</p>
         {this._hasVotedFor(entry) ?
           <div className="label">Voted</div> :
           null}
@@ -37,5 +40,6 @@ export default class VotePane extends PureComponent {
 VotePane.propTypes = {
   entry: PropTypes.string.isRequired,
   voteCallback: PropTypes.func.isRequired,
-  hasVoted: PropTypes.string
+  hasVoted: PropTypes.string,
+  tally: PropTypes.instanceOf(Map)
 };
